@@ -1,0 +1,62 @@
+// Pin assignments
+const int redPin = 2;
+const int yellowPin = 3;
+const int greenPin = 4;
+const int pedestrianButton = 5;
+const int walkSignal = 6;
+
+bool buttonPressed = false;
+
+void setup() {
+  pinMode(redPin, OUTPUT);
+  pinMode(yellowPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(walkSignal, OUTPUT);
+  pinMode(pedestrianButton, INPUT_PULLUP); // Use internal pull-up
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (digitalRead(pedestrianButton) == LOW) {
+    buttonPressed = true;
+    Serial.println("Pedestrian button pressed!");
+  }
+
+  if (buttonPressed) {
+    trafficStop();
+    allowPedestrianToCross();
+    buttonPressed = false;
+  } else {
+    normalTrafficFlow();
+  }
+}
+
+void normalTrafficFlow() {
+  digitalWrite(redPin, LOW);
+  digitalWrite(walkSignal, LOW);
+  digitalWrite(greenPin, HIGH);
+  delay(5000); // Green for 5 sec
+
+  digitalWrite(greenPin, LOW);
+  digitalWrite(yellowPin, HIGH);
+  delay(2000); // Yellow for 2 sec
+  digitalWrite(yellowPin, LOW);
+  digitalWrite(redPin, HIGH);
+  delay(2000); // Red for 2 sec
+}
+
+void trafficStop() {
+  digitalWrite(greenPin, LOW);
+  digitalWrite(yellowPin, HIGH);
+  delay(2000);
+  digitalWrite(yellowPin, LOW);
+  digitalWrite(redPin, HIGH);
+  delay(2000);
+}
+
+void allowPedestrianToCross() {
+  digitalWrite(walkSignal, HIGH); // Pedestrian walks
+  delay(5000); // Allow 5 seconds to cross
+  digitalWrite(walkSignal, LOW);
+  delay(1000);
+}
