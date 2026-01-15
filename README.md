@@ -3,8 +3,8 @@
 - 🌱 I’m currently learning software engineering
 - 💞️ I’m looking to collaborate on ...
 - 📫 How to reach me 0748184217
-- 😄 Status: Single and searching
-- ⚡ Fun fact: Kijana Hendsam
+- 😄 Status: 
+- ⚡ Fun fact: 
 
 <!---
 sirnickko/sirnickko is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
